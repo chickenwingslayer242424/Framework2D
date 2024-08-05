@@ -18,5 +18,9 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(2);
     }
-
+    public void CloseGame()
+    {
+        //Application.Quit(); //nutzen für build
+        UnityEditor.EditorApplication.isPlaying = false; //schließt den editor
+    }
 }
