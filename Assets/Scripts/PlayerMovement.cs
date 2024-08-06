@@ -12,12 +12,13 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //input
-        Movement();
+        
     }
 
     void FixedUpdate()  //fixedupdate ist framerate unabhängig // 50 fps
     {
         rb.MovePosition(rb.position + movement * moveSpeed* Time.fixedDeltaTime);
+        Movement();
     }
 
     public void Movement()
