@@ -6,15 +6,15 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform player;       // Reference to the player's transform
     public Vector3 offset;         // Offset between the camera and player
-    public float smoothSpeed = 0.125f; // How smooth the camera movement will be
+    public float smoothSpeed = 0.3f; // How smooth the camera movement will be
+    private Vector3 velocity = Vector3.zero;
 
-    void LateUpdate()
+    void FixedUpdate() //bei SmoothDamp interpolate -> none sonst geht nicht
     {
-        Vector3 desiredPosition = player.position + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        transform.position = smoothedPosition;
+        Vector3 targetPosition = player.position + offset;
 
-        // If you want the camera to look at the player, uncomment the following line
-        // transform.LookAt(player);
+
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothSpeed);
+
     }
 }
