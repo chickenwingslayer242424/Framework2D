@@ -24,6 +24,6 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");//gibt dir -1 wenn nach links, 1 wenn nach rechts, 0 wenn nichts gedrückt wird zurück
         movement.y = Input.GetAxisRaw("Vertical"); //+1 oben, -1 unten, 0 nichts
-        movement = movement.normalized; // x und y haben konstante geschwindigkeit, mit normalized ist es auch queer gleich schnell
+        movement = movement.normalized; // x und y haben konstante geschwindigkeit, mit normalized ist es auch queer gleich schnell 
     }
 }
