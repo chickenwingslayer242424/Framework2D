@@ -48,7 +48,7 @@ public class CameraFollow : MonoBehaviour
     }
     void ZoomIn()
     {
-        // Set the orthographic size to the minimum zoom in value (original size)
+       
         cam.orthographicSize = minZoomIn;
     }
 }
