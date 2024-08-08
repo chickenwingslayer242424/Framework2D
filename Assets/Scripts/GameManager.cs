@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour //put the ItemTrigger on the PlayerBody
     public GameObject itemPrefab;
     public Vector2 spawnAreaMin;
     public Vector2 spawnAreaMax;
+   public TMP_Text endScoreText;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Item") && collision.gameObject.activeSelf)
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour //put the ItemTrigger on the PlayerBody
             pointsCounter += 1;
             pointsText.text = "Points: " + pointsCounter;
             SpawnNewItem();
-
+            endScoreText.text = "Your Score: " + pointsCounter;
         }
     }
     private void SpawnNewItem()
