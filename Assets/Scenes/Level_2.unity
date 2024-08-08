@@ -1851,6 +1851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1189828799}
   parentAfterDrag: {fileID: 0}
+  scoreValue: 10
 --- !u!114 &1189828799
 MonoBehaviour:
   m_ObjectHideFlags: 0

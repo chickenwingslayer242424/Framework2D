@@ -7,14 +7,14 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData eventData)
     {
-        if (transform.childCount == 0)
+        if (transform.childCount == 0) //Wenn der Slot leer ist
         {
-            GameObject dropped = eventData.pointerDrag;
-            DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
-            draggableItem.parentAfterDrag = transform;
-            // Set the dropped item as a child of the slot to make it part of the slot's hierarchy
+            GameObject dropped = eventData.pointerDrag; //das gezogene Item
+            DraggableItem draggableItem = dropped.GetComponent<DraggableItem>(); //Zugriff auf das DraggableItem-Skript
+            draggableItem.parentAfterDrag = transform; //Setzt den Slot als neuen Parent des Items
+            //Setzt das Item als Kind des Slots
             dropped.transform.SetParent(transform, false);
-            dropped.transform.localPosition = Vector3.zero; // Ensure the dropped item snaps inside the slot
+            dropped.transform.localPosition = Vector3.zero; //setzt die Position des Items im Slot zurück
         }
     }
 }
