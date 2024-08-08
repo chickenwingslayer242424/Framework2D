@@ -7,10 +7,10 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    public Transform inventoryPanel; // The panel that will hold the inventory items
-    public TMP_Text scoreText; // TMP_Text element to display the score
+    public Transform inventoryPanel; 
+    public TMP_Text scoreText; 
 
-    private int score = 0; // The player's score
+    private int score = 0; // player's score -- kommt später
     private List<GameObject> inventoryItems = new List<GameObject>(); // List to keep track of inventory items
 
     private void Awake()
@@ -36,6 +36,6 @@ public class UIManager : MonoBehaviour
     {
         item.transform.SetParent(inventoryPanel, false);
         inventoryItems.Add(item);
-        UpdateScore(10); // Example score increment when an item is added
+        UpdateScore(10); // Example score -- kommt auch später
     }
 }
