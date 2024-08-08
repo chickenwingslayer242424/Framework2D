@@ -7,16 +7,14 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    // Referenzen zu UI-Elementen
-    public Transform inventoryPanel; // Das Panel, das die Inventargegenstände hält
-    public TMP_Text scoreText; // TMP_Text-Element zur Anzeige der Punkte
+    public Transform inventoryPanel; // The panel that will hold the inventory items
+    public TMP_Text scoreText; // TMP_Text element to display the score
 
-    private int score = 0; // Die Punktzahl des Spielers
-    private List<GameObject> inventoryItems = new List<GameObject>(); // Liste zur Verwaltung der Inventargegenstände
+    private int score = 0; // The player's score
+    private List<GameObject> inventoryItems = new List<GameObject>(); // List to keep track of inventory items
 
-    void Awake()
+    private void Awake()
     {
-        // Sicherstellen, dass nur eine Instanz von UIManager existiert
         if (Instance == null)
         {
             Instance = this;
@@ -28,29 +26,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // Methode zur Aktualisierung der Punkteanzeige
     public void UpdateScore(int amount)
     {
         score += amount;
         scoreText.text = "Score: " + score;
     }
 
-    // Methode zum Hinzufügen eines Gegenstands zum Inventar-UI
     public void UpdateInventoryUI(GameObject item)
     {
-        GameObject newItem = new GameObject(item.name);
-        newItem.AddComponent<Image>().sprite = item.GetComponent<SpriteRenderer>().sprite;
-        newItem.transform.SetParent(inventoryPanel, false);
-        inventoryItems.Add(newItem);
-    }
-
-    // Methode zum Leeren des Inventars
-    public void ClearInventory()
-    {
-        foreach (GameObject item in inventoryItems)
-        {
-            Destroy(item);
-        }
-        inventoryItems.Clear();
+        item.transform.SetParent(inventoryPanel, false);
+        inventoryItems.Add(item);
+        UpdateScore(10); // Example score increment when an item is added
     }
 }
