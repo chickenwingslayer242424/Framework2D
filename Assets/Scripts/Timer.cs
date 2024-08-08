@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
      public bool timerIsRunning = false;
      public float timeRemaining = 15f;
      public TMP_Text timerText;
+     public GameObject gameOverScreen;
     void Start()
     {
         timerIsRunning = true;
@@ -26,6 +27,7 @@ public class Timer : MonoBehaviour
         {
              timeRemaining = 0;
              Time.timeScale = 0f;
+             gameOverScreen.SetActive(true);
         }
     }
 }
