@@ -46,7 +46,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
         else
         {
-            // Return to original position if not dropped in a slot
+            //snaps back to original position bruh
             transform.SetParent(parentAfterDrag);
             transform.position = startPosition;
         }
