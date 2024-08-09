@@ -736,13 +736,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1faece9969d4741b53f244b8470f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 10
+  scrollSpeed: 8
   zoomSpeed: 2
   minZoom: 5
   maxZoom: 10
-  edgeScrollBoundary: 10
-  minBounds: {x: -6, y: -4}
-  maxBounds: {x: 6, y: 4}
+  edgeScrollBoundary: 50
+  minBounds: {x: -15, y: -8}
+  maxBounds: {x: 15, y: 8}
 --- !u!1 &563369095
 GameObject:
   m_ObjectHideFlags: 0

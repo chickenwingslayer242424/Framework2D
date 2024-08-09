@@ -59,6 +59,18 @@ public class CameraController : MonoBehaviour
         float size = cam.orthographicSize;//aktuelle Größe der Kamera
         size -= scroll * zoomSpeed; //Verändert die Größe basierend auf dem Mausrad
         size = Mathf.Clamp(size, minZoom, maxZoom); //setzt grenzen für den Zoom
+        
+        //Begrenzt maximale Zoomstufe basierend auf der Größe des Hintergrunds
+        float maxZoomWidth = (maxBounds.x - minBounds.x) / 2f;
+        float maxZoomHeight = (maxBounds.y - minBounds.y) / 2f;
+        size = Mathf.Min(size, maxZoomWidth / cam.aspect, maxZoomHeight);
+
         cam.orthographicSize = size; //aktualisiert die Größe der Kamera
+        
+        // Kamera mittig halten
+        Vector3 pos = cam.transform.position;
+        pos.x = Mathf.Clamp(pos.x, minBounds.x + size * cam.aspect, maxBounds.x - size * cam.aspect);
+        pos.y = Mathf.Clamp(pos.y, minBounds.y + size, maxBounds.y - size);
+        cam.transform.position = pos;
     }
 }
