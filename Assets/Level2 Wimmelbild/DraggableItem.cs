@@ -17,6 +17,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Canvas canvas; //ItemCanvas
 
     public TMP_Text associatedText; // Der Text, der durchgestrichen werden soll
+    public Sprite defaultSprite; //default sprite of the itemssss
 
     private void Awake() // Zugriff erteilen
     {
@@ -71,6 +72,13 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             //setzt die Skalierung des Items auf 1, damit es korrekt im UI-Canvas angezeigt wird
             transform.localScale = Vector3.one;
 
+            //default Item Sprites
+            if (defaultSprite != null)
+            {
+                image.sprite = defaultSprite;
+                image.color = Color.white; //setzt die Farbe auf weiß -- weil Scene item sprites gefärbt sind
+            }
+
             //passt die Größe des Items an die Größe des Slots an -- sonst sieht es shit aus
             RectTransform slotRectTransform = eventData.pointerEnter.GetComponent<RectTransform>();
             RectTransform itemRectTransform = GetComponent<RectTransform>();
@@ -80,7 +88,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             UIManager.Instance.UpdateScore(finalScore); //aktualisiert Punktestand
 
             // Item als gefunden markieren
-            UIManager.Instance.MarkItemAsFound(associatedText); // Den zugehörigen Text durchstreichen
+            UIManager.Instance.MarkItemAsFound(associatedText); //zugehörigen Text durchstreichen
 
             isPickedUp = true;
             this.enabled = false; //deaktiviert das Skript, damit das Item nicht erneut gezogen werden kann

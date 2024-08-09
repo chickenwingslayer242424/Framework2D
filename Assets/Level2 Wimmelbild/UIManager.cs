@@ -42,11 +42,9 @@ public class UIManager : MonoBehaviour
     {
         if (itemText != null)
         {
-            // Option 1: Text durchstreichen
+            //Text wird durchgestrichen
             itemText.fontStyle = FontStyles.Strikethrough;
 
-            // Option 2: Text ausblenden
-            // itemText.gameObject.SetActive(false);
         }
     }
 }

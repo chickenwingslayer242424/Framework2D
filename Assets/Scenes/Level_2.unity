@@ -289,8 +289,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 75105474}
   parentAfterDrag: {fileID: 0}
-  scoreValue: 20
+  scoreValue: 40
   associatedText: {fileID: 1462733165}
+  defaultSprite: {fileID: 21300000, guid: ec5e69a9d4dba714ca2c5b3615064f92, type: 3}
 --- !u!114 &75105474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1184,8 +1185,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 571182746}
   parentAfterDrag: {fileID: 0}
-  scoreValue: 10
+  scoreValue: 40
   associatedText: {fileID: 1715785719}
+  defaultSprite: {fileID: 21300000, guid: 4901dfb3d960600419677afd71636592, type: 3}
 --- !u!114 &571182746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2466,8 +2468,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1189828799}
   parentAfterDrag: {fileID: 0}
-  scoreValue: 10
+  scoreValue: 20
   associatedText: {fileID: 887571710}
+  defaultSprite: {fileID: 21300000, guid: f6ed175a4d17b3940929a98b797eb7fd, type: 3}
 --- !u!114 &1189828799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2583,8 +2586,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1250887913}
   parentAfterDrag: {fileID: 0}
-  scoreValue: 10
+  scoreValue: 20
   associatedText: {fileID: 268164567}
+  defaultSprite: {fileID: 21300000, guid: d8dac8a9ebba4cf438ce016659dabb2c, type: 3}
 --- !u!114 &1250887913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3604,16 +3608,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005595848}
-  m_LocalRotation: {x: -0, y: -0, z: 0.38416213, w: 0.92326564}
+  m_LocalRotation: {x: -0, y: -0, z: 0.08406382, w: 0.9964604}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 468625258}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45.184}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 9.644}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.68, y: 1.2}
+  m_AnchoredPosition: {x: -5.68, y: 1.34}
   m_SizeDelta: {x: 1.2569, y: 1.3318}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2005595850
@@ -3642,8 +3646,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 2005595852}
   parentAfterDrag: {fileID: 0}
-  scoreValue: 10
+  scoreValue: 20
   associatedText: {fileID: 1801883228}
+  defaultSprite: {fileID: 21300000, guid: 95cc3be218594e748879e15760a9f2ee, type: 3}
 --- !u!114 &2005595852
 MonoBehaviour:
   m_ObjectHideFlags: 0
