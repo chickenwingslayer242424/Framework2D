@@ -17,13 +17,18 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Canvas canvas; //ItemCanvas
 
     public TMP_Text associatedText; // Der Text, der durchgestrichen werden soll
-    public Sprite defaultSprite; //default sprite of the itemssss
+    public Sprite defaultSprite; // Standardbild, das im Slot verwendet werden soll
+
+    public AudioClip dragSound; // Sound beim Starten des Ziehens
+    public AudioClip dropSound; // Sound beim Ablegen im Slot
+    private AudioSource audioSource;
 
     private void Awake() // Zugriff erteilen
     {
         canvasGroup = GetComponent<CanvasGroup>();
         image = GetComponent<Image>();
         canvas = GetComponentInParent<Canvas>();
+        audioSource = GetComponent<AudioSource>(); // AudioSource-Komponente
     }
 
     private void Update()
@@ -44,6 +49,12 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             transform.SetAsLastSibling(); //setzt das Item als letztes Kind im Canvas, damit es oben angezeigt wird
             image.raycastTarget = false; //deaktiviert das Raycasting auf das Bild, um zu verhindern, dass es weitere Raycasting-Ereignisse empfängt
             canvasGroup.blocksRaycasts = false; //deaktiviert das Raycasting auf die CanvasGroup, damit man über andere UI-Elemente hinweg ziehen kann, ohne dass diese blockiert werden!!
+
+            // Play drag sound
+            if (audioSource != null && dragSound != null)
+            {
+                audioSource.PlayOneShot(dragSound);
+            }
         }
     }
 
@@ -72,11 +83,11 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             //setzt die Skalierung des Items auf 1, damit es korrekt im UI-Canvas angezeigt wird
             transform.localScale = Vector3.one;
 
-            //default Item Sprites
+            // Standardbild verwenden
             if (defaultSprite != null)
             {
                 image.sprite = defaultSprite;
-                image.color = Color.white; //setzt die Farbe auf weiß -- weil Scene item sprites gefärbt sind
+                image.color = Color.white; //setzt die Farbe auf weiß, um sicherzustellen, dass es nicht eingefärbt ist
             }
 
             //passt die Größe des Items an die Größe des Slots an -- sonst sieht es shit aus
@@ -88,7 +99,13 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             UIManager.Instance.UpdateScore(finalScore); //aktualisiert Punktestand
 
             // Item als gefunden markieren
-            UIManager.Instance.MarkItemAsFound(associatedText); //zugehörigen Text durchstreichen
+            UIManager.Instance.MarkItemAsFound(associatedText); // Den zugehörigen Text durchstreichen
+
+            // Play drop sound
+            if (audioSource != null && dropSound != null)
+            {
+                audioSource.PlayOneShot(dropSound);
+            }
 
             isPickedUp = true;
             this.enabled = false; //deaktiviert das Skript, damit das Item nicht erneut gezogen werden kann
