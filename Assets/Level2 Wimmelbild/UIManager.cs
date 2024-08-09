@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance; // Singleton bbg
 
     public Transform inventoryPanel; 
-    public TMP_Text scoreText; 
+    public TMP_Text scoreText;
 
     private int score = 0; //Punktestand
     private List<GameObject> inventoryItems = new List<GameObject>(); //liste zur Verwaltung der Inventargegenstände
@@ -36,5 +36,17 @@ public class UIManager : MonoBehaviour
     {
         item.transform.SetParent(inventoryPanel, false); //Das Item zum Inventar-Panel hinzufügen
         inventoryItems.Add(item); //Das Item zur Inventar-Liste hinzufügen
+    }
+
+    public void MarkItemAsFound(TMP_Text itemText)
+    {
+        if (itemText != null)
+        {
+            // Option 1: Text durchstreichen
+            itemText.fontStyle = FontStyles.Strikethrough;
+
+            // Option 2: Text ausblenden
+            // itemText.gameObject.SetActive(false);
+        }
     }
 }

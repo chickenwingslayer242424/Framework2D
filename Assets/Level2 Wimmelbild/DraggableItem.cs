@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Image image;
-    [HideInInspector] public Transform parentAfterDrag; // Der Parent des Items nach dem Ziehen
+    [HideInInspector] public Transform parentAfterDrag; //Parent des Items nach dem Ziehen
     public int scoreValue = 10; 
     private bool isPickedUp = false; //Checkt, ob das Item aufgenommen wurde
     private float timeTaken = 0f; //Die Zeit, die für das Ziehen des Items benötigt wird
     private CanvasGroup canvasGroup; //die CanvasGroup-Komponente des Items
     private Vector3 startPosition; //Item Starposition
     private Canvas canvas; //ItemCanvas
+
+    public TMP_Text associatedText; // Der Text, der durchgestrichen werden soll
 
     private void Awake() // Zugriff erteilen
     {
@@ -75,6 +78,10 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
             int finalScore = Mathf.Max(1, scoreValue - Mathf.FloorToInt(timeTaken)); //berechnet die Punkte, die abgezogen werden sollen
             UIManager.Instance.UpdateScore(finalScore); //aktualisiert Punktestand
+
+            // Item als gefunden markieren
+            UIManager.Instance.MarkItemAsFound(associatedText); // Den zugehörigen Text durchstreichen
+
             isPickedUp = true;
             this.enabled = false; //deaktiviert das Skript, damit das Item nicht erneut gezogen werden kann
         }
