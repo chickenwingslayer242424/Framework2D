@@ -6,19 +6,19 @@ using UnityEngine.EventSystems;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public Image image; //Item Image 
-    [HideInInspector] public Transform parentAfterDrag; //der Parent des Items nach dem Ziehen
+    public Image image;
+    [HideInInspector] public Transform parentAfterDrag; // Der Parent des Items nach dem Ziehen
     public int scoreValue = 10; 
-    private bool isPickedUp = false; //checkt, ob das Item aufgenommen wurde
-    private float timeTaken = 0f; // Die Zeit, die für das Ziehen des Items benötigt wird
-    private CanvasGroup canvasGroup; // Die CanvasGroup-Komponente des Items
-    private Vector3 startPosition; // Die Startposition des Items
-    private Canvas canvas; // Der Canvas, auf dem das Item ist
+    private bool isPickedUp = false; //Checkt, ob das Item aufgenommen wurde
+    private float timeTaken = 0f; //Die Zeit, die für das Ziehen des Items benötigt wird
+    private CanvasGroup canvasGroup; //die CanvasGroup-Komponente des Items
+    private Vector3 startPosition; //Item Starposition
+    private Canvas canvas; //ItemCanvas
 
-    private void Awake() //zugriff erteilen
+    private void Awake() // Zugriff erteilen
     {
-        canvasGroup = GetComponent<CanvasGroup>(); 
-        image = GetComponent<Image>(); 
+        canvasGroup = GetComponent<CanvasGroup>();
+        image = GetComponent<Image>();
         canvas = GetComponentInParent<Canvas>();
     }
 
@@ -26,7 +26,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if (!isPickedUp && parentAfterDrag == null) //wenn das Item gezogen wird und noch keinen neuen Parent hat
         {
-            timeTaken += Time.deltaTime; //Zeit für das Ziehen des Items erhöhen
+            timeTaken += Time.deltaTime; //zeit für das Ziehen des Items erhöhen
         }
     }
 
@@ -35,19 +35,21 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (canvasGroup != null)
         {
             parentAfterDrag = transform.parent; //setzt den aktuellen Parent des Items
-            startPosition = transform.position; // Speichere die Startposition des Items
-            transform.SetParent(canvas.transform); // Setzt den Canvas als neuen Parent
+            startPosition = transform.position; //speichert Startposition des Items
+            transform.SetParent(canvas.transform); //setzt den Canvas als neuen Parent
             transform.SetAsLastSibling(); //setzt das Item als letztes Kind im Canvas, damit es oben angezeigt wird
-            image.raycastTarget = false; //deaktiviert das Raycasting auf das Bild  um zu verhindern, dass es weitere Raycasting-Ereignisse empfängt!!
-            canvasGroup.blocksRaycasts = false; //deaktiviere das Raycasting auf die CanvasGroup, damit man über andere UI-Elemente hinweg ziehen kann, ohne dass diese blockiert werden
+            image.raycastTarget = false; //deaktiviert das Raycasting auf das Bild, um zu verhindern, dass es weitere Raycasting-Ereignisse empfängt
+            canvasGroup.blocksRaycasts = false; //deaktiviert das Raycasting auf die CanvasGroup, damit man über andere UI-Elemente hinweg ziehen kann, ohne dass diese blockiert werden!!
         }
     }
 
-    public void OnDrag(PointerEventData eventData) // Mouseposition wird in Worldspace umgerechnet
+    public void OnDrag(PointerEventData eventData) //mouseposition wird in Worldspace umgerechnet
     {
-        if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
+        if (canvas.renderMode == RenderMode.WorldSpace)
         {
-            RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, eventData.position, canvas.worldCamera, out Vector3 globalMousePos);
+            //umwandlung der Bildschirmposition der Maus in Worldcoordinates
+            Vector3 globalMousePos;
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, eventData.position, canvas.worldCamera, out globalMousePos);
             transform.position = globalMousePos; //setzt die Position des Items auf die Mausposition
         }
         else
@@ -58,19 +60,28 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (parentAfterDrag.GetComponent<InventorySlot>() != null) //Wenn das Item in einen Slot gezogen wurde, passiert folgendes:
+        if (eventData.pointerEnter != null && eventData.pointerEnter.CompareTag("InventorySlot")) //wenn das Item in einen Slot gezogen wurde, passiert folgendes:
         {
-            transform.SetParent(parentAfterDrag, false); //setzt den Slot als neuen Parent des Items
+            transform.SetParent(eventData.pointerEnter.transform, false); //setzt den Slot als neuen Parent des Items
             transform.localPosition = Vector3.zero; //setzt die Position des Items im Slot zurück
+
+            //setzt die Skalierung des Items auf 1, damit es korrekt im UI-Canvas angezeigt wird
+            transform.localScale = Vector3.one;
+
+            //passt die Größe des Items an die Größe des Slots an -- sonst sieht es shit aus
+            RectTransform slotRectTransform = eventData.pointerEnter.GetComponent<RectTransform>();
+            RectTransform itemRectTransform = GetComponent<RectTransform>();
+            itemRectTransform.sizeDelta = slotRectTransform.sizeDelta;
+
             int finalScore = Mathf.Max(1, scoreValue - Mathf.FloorToInt(timeTaken)); //berechnet die Punkte, die abgezogen werden sollen
             UIManager.Instance.UpdateScore(finalScore); //aktualisiert Punktestand
-            isPickedUp = true; 
+            isPickedUp = true;
             this.enabled = false; //deaktiviert das Skript, damit das Item nicht erneut gezogen werden kann
         }
         else
         {
-            transform.SetParent(parentAfterDrag); // Setze den ursprünglichen Parent des Items
-            transform.position = startPosition; // Setze die Position des Items zurück
+            transform.SetParent(parentAfterDrag); //setzt ursprünglichen Parent des Items
+            transform.position = startPosition; //setzt Position des Items zurück
         }
 
         image.raycastTarget = true; //aktiviert Raycasting aufs Bild
