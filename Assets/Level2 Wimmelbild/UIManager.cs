@@ -2,15 +2,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement; 
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance; // Singleton bbg
 
-    public Transform inventoryPanel; 
+    public Transform inventoryPanel;
     public TMP_Text scoreText;
+    public GameObject FinalScorePanel; 
+    public TMP_Text EndScoreText; 
 
     private int score = 0; //Punktestand
+    private int collectedItemCount = 0; // Number of collected items
+    private int totalItems = 5; // Total number of items to collect
     private List<GameObject> inventoryItems = new List<GameObject>(); //liste zur Verwaltung der Inventargegenstände
 
     private void Awake()
@@ -34,17 +39,31 @@ public class UIManager : MonoBehaviour
 
     public void UpdateInventoryUI(GameObject item)
     {
-        item.transform.SetParent(inventoryPanel, false); //Das Item zum Inventar-Panel hinzufügen
         inventoryItems.Add(item); //Das Item zur Inventar-Liste hinzufügen
+        collectedItemCount++;
+
+        if (collectedItemCount >= totalItems)
+        {
+            ShowHighScorePanel();
+        }
     }
 
     public void MarkItemAsFound(TMP_Text itemText)
     {
-        if (itemText != null)
-        {
-            //Text wird durchgestrichen
-            itemText.fontStyle = FontStyles.Strikethrough;
+        // Itemtext durchstreichen
+        itemText.fontStyle = FontStyles.Strikethrough;
+    }
 
-        }
+    private void ShowHighScorePanel()
+    {
+        FinalScorePanel.SetActive(true);
+        EndScoreText.text = "Your Score: " + score;
+        Time.timeScale = 0f; //freezes game
+    }
+
+    public void BackToMainMenu()
+    {
+        Time.timeScale = 1f; // Resume the game
+        SceneManager.LoadSceneAsync(0); // Load the main menu scene
     }
 }
