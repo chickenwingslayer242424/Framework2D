@@ -66,13 +66,10 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f; // Resume the game
         SceneManager.LoadSceneAsync(0); // Load the main menu scene
     }
-
-    
     public void CloseGame()
     {
         //Application.Quit(); //nutzen für build
         UnityEditor.EditorApplication.isPlaying = false; //schließt den editor
     }
-
 
 }
