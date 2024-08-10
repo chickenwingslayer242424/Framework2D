@@ -157,9 +157,9 @@ RectTransform:
   - {fileID: 280043713}
   m_Father: {fileID: 1661006355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141.2, y: -93.8}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -91.8, y: 34.199997}
   m_SizeDelta: {x: 79.25, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &14100567
@@ -208,7 +208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 196972468}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: BackToMainMenu
+        m_MethodName: CloseGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1712,8 +1712,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -107.93, y: 55.4}
-  m_SizeDelta: {x: 188.54, y: 46.88}
+  m_AnchoredPosition: {x: -84.9, y: 23.44}
+  m_SizeDelta: {x: 188.53998, y: 46.880005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &652918074
 MonoBehaviour:
@@ -1737,8 +1737,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Your Score:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6fd01240e9903ba44872009fa53565eb, type: 2}
+  m_sharedMaterial: {fileID: 105283672856530105, guid: 6fd01240e9903ba44872009fa53565eb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3507,9 +3507,9 @@ RectTransform:
   - {fileID: 840740277}
   m_Father: {fileID: 1661006355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -132.2, y: -93.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 100.8, y: 34.199997}
   m_SizeDelta: {x: 140.01, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1348025655
@@ -3629,7 +3629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1439988140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4136,7 +4136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8160377, g: 0.95446146, b: 1, a: 1}
+  m_Color: {r: 0.6981132, g: 0.33259168, b: 0.40114054, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
