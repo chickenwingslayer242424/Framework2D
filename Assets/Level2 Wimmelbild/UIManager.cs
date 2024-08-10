@@ -52,6 +52,9 @@ public class UIManager : MonoBehaviour
     {
         // Itemtext durchstreichen
         itemText.fontStyle = FontStyles.Strikethrough;
+
+        // Adjust thickness of the strikethrough line
+        itemText.outlineWidth = 0.5f; // Adjust the value as needed for the desired thickness
     }
 
     private void ShowHighScorePanel()
@@ -71,5 +74,4 @@ public class UIManager : MonoBehaviour
         //Application.Quit(); //nutzen für build
         UnityEditor.EditorApplication.isPlaying = false; //schließt den editor
     }
-
 }

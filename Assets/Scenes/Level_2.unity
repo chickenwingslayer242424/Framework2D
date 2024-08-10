@@ -2551,8 +2551,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290821073
-  m_fontColor: {r: 0.8207547, g: 0.73171055, b: 0.7545655, a: 1}
+    rgba: 4292660193
+  m_fontColor: {r: 0.882353, g: 0.7960785, b: 0.86274517, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3760,8 +3760,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290424512
-  m_fontColor: {r: 0.75294125, g: 0.68235296, b: 0.7294118, a: 1}
+    rgba: 4292660193
+  m_fontColor: {r: 0.882353, g: 0.7960785, b: 0.86274517, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4248,8 +4248,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4292790751
-  m_fontColor: {r: 0.8745099, g: 0.78823537, b: 0.8705883, a: 1}
+    rgba: 4292660193
+  m_fontColor: {r: 0.882353, g: 0.7960785, b: 0.86274517, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4634,8 +4634,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290030529
-  m_fontColor: {r: 0.7568628, g: 0.67058825, b: 0.7058824, a: 1}
+    rgba: 4292660193
+  m_fontColor: {r: 0.882353, g: 0.7960785, b: 0.86274517, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5193,63 +5193,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1001 &1738569866024649058
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 600029122038081847, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600029122038081847, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600029122038081847, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600029122038081847, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 600029122038081847, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600029122038081847, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600029122038081847, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600029122038081847, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600029122038081847, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 600029122038081847, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6275187787374177783, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
-      propertyPath: m_Name
-      value: ConfettiBurst
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 73237f17f1a51234698b8c2a139e6575, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5263,4 +5206,3 @@ SceneRoots:
   - {fileID: 639922985}
   - {fileID: 468625258}
   - {fileID: 1439988143}
-  - {fileID: 1738569866024649058}
