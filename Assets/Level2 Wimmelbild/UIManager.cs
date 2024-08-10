@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
+using DG.Tweening; 
 
 public class UIManager : MonoBehaviour
 {
@@ -10,12 +11,12 @@ public class UIManager : MonoBehaviour
 
     public Transform inventoryPanel;
     public TMP_Text scoreText;
-    public GameObject FinalScorePanel; 
-    public TMP_Text EndScoreText; 
+    public GameObject FinalScorePanel;
+    public TMP_Text EndScoreText;
 
-    private int score = 0; //Punktestand
-    private int collectedItemCount = 0; // Number of collected items
-    private int totalItems = 5; // Total number of items to collect
+    private int score = 0; 
+    private int collectedItemCount = 0; 
+    private int totalItems = 5; 
     private List<GameObject> inventoryItems = new List<GameObject>(); //liste zur Verwaltung der Inventargegenstände
 
     private void Awake()
@@ -52,16 +53,23 @@ public class UIManager : MonoBehaviour
     {
         // Itemtext durchstreichen
         itemText.fontStyle = FontStyles.Strikethrough;
-
-        // Adjust thickness of the strikethrough line
-        itemText.outlineWidth = 0.5f; // Adjust the value as needed for the desired thickness
+        itemText.outlineWidth = 0.5f; 
     }
 
     private void ShowHighScorePanel()
     {
         FinalScorePanel.SetActive(true);
         EndScoreText.text = "Your Score: " + score;
-        Time.timeScale = 0f; //freezes game
+
+        // Set initial position of the panel below the screen
+        RectTransform panelRectTransform = FinalScorePanel.GetComponent<RectTransform>();
+        panelRectTransform.anchoredPosition = new Vector2(0, -Screen.height);
+
+        //Animate the panel to move up to the center of the screen
+        panelRectTransform.DOAnchorPosY(0, 1f).SetEase(Ease.OutBounce).OnComplete(() =>
+        {
+            Time.timeScale = 0f; //freezes game nach der Animation
+        });
     }
 
     public void BackToMainMenu()
@@ -69,6 +77,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f; // Resume the game
         SceneManager.LoadSceneAsync(0); // Load the main menu scene
     }
+
     public void CloseGame()
     {
         //Application.Quit(); //nutzen für build
