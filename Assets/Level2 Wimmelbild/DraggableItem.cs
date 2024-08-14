@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using DG.Tweening; 
 
-public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Image image;
     [HideInInspector] public Transform parentAfterDrag; //Parent des Items nach dem Ziehen
     public int scoreValue = 10;
     private bool isPickedUp = false; //Checkt, ob das Item aufgenommen wurde
-    private float timeTaken = 0f; // Die Zeit, die für das Ziehen des Items benötigt wird
+    private float timeTaken = 0f;
     private CanvasGroup canvasGroup; //Die CanvasGroup-Komponente des Items
     private Vector3 startPosition; // Item Startposition
     private Canvas canvas; // ItemCanvas
@@ -22,6 +23,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public AudioClip dragSound;
     public AudioClip dropSound; 
     private AudioSource audioSource;
+    private Tween hoverTween; //DOTween animation reference
 
     private void Awake() // Zugriff erteilen
     {
@@ -51,11 +53,16 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             image.raycastTarget = false; // deaktiviert das Raycasting auf das Bild, um zu verhindern, dass es weitere Raycasting-Ereignisse empfängt
             canvasGroup.blocksRaycasts = false; // deaktiviert das Raycasting auf die CanvasGroup, damit man über andere UI-Elemente hinweg ziehen kann, ohne dass diese blockiert werden!!
 
-            // Play drag sound
+            //plays drag sound
             if (audioSource != null && dragSound != null)
             {
                 audioSource.PlayOneShot(dragSound);
             }
+
+            //stops the hover animation
+            hoverTween.Kill();
+            //resets the position to ensure it snaps correctly
+            transform.localPosition = startPosition;
         }
     }
 
@@ -122,5 +129,22 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         image.raycastTarget = true; //aktiviert Raycasting aufs Bild
         canvasGroup.blocksRaycasts = true; // aktiviert Raycasting auf die CanvasGroup
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) //DOTween Animation
+    {
+        if (!isPickedUp)
+        {
+            //starts hover animation: bounce
+            hoverTween = transform.DOLocalMoveY(startPosition.y + 0.5f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //stops hover animation
+        hoverTween.Kill();
+        //reset position
+        transform.DOLocalMove(startPosition, 0.01f).SetEase(Ease.InOutSine);
     }
 }
