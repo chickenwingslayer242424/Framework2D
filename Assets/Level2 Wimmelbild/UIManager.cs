@@ -114,6 +114,13 @@ public class UIManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false; //schließt den editor
     }
 
+    public void ReplayGame()
+    {
+        Time.timeScale = 1f; 
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex); //reload the current scene
+        ResetGame(); //resets game state before reloading the scene
+    }
+
     private void ResetGame()
     {
         score = 0;
