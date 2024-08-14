@@ -23,24 +23,41 @@ public class UIManager : MonoBehaviour
     {
         if (Instance == null) //wenn es noch keine Instanz gibt:
         {
-            Instance = this; //diese Instanz wird zur Singleton-Instanz
-            DontDestroyOnLoad(gameObject); //nicht zerstören, wenn eine neue Szene geladen wird
+            Instance = this; // diese Instanz wird zur Singleton-Instanz
         }
         else
         {
             Destroy(gameObject); //wenn es schon eine Instanz gibt, zerstöre diese!!!!
+            return;
         }
+    }
+
+    private void Start()
+    {
+        ResetGame(); //resets game state at the start -- merk dir das Feyza
     }
 
     public void UpdateScore(int amount)
     {
-        score += amount; //punktestand um den übergebenen Betrag zu erhöhen
-        scoreText.text = "Score: " + score; //aktualisert UI Punktestand
+        if (scoreText == null)
+        {
+            Debug.LogWarning("ScoreText is not assigned.");
+            return;
+        }
+
+        score += amount; // Punktestand um den übergebenen Betrag zu erhöhen
+        scoreText.text = "Score: " + score; // aktualisiert UI Punktestand
     }
 
     public void UpdateInventoryUI(GameObject item)
     {
-        inventoryItems.Add(item); //Das Item zur Inventar-Liste hinzufügen
+        if (inventoryItems == null)
+        {
+            Debug.LogWarning("InventoryItems is not initialized.");
+            return;
+        }
+
+        inventoryItems.Add(item); // Das Item zur Inventar-Liste hinzufügen
         collectedItemCount++;
 
         if (collectedItemCount >= totalItems)
@@ -51,6 +68,12 @@ public class UIManager : MonoBehaviour
 
     public void MarkItemAsFound(TMP_Text itemText)
     {
+        if (itemText == null)
+        {
+            Debug.LogWarning("ItemText is not assigned.");
+            return;
+        }
+
         // Itemtext durchstreichen
         itemText.fontStyle = FontStyles.Strikethrough;
         itemText.outlineWidth = 0.5f; 
@@ -58,6 +81,12 @@ public class UIManager : MonoBehaviour
 
     private void ShowHighScorePanel()
     {
+        if (FinalScorePanel == null || EndScoreText == null)
+        {
+            Debug.LogWarning("FinalScorePanel or EndScoreText is not assigned.");
+            return;
+        }
+
         FinalScorePanel.SetActive(true);
         EndScoreText.text = "Your Score: " + score;
 
@@ -65,7 +94,7 @@ public class UIManager : MonoBehaviour
         RectTransform panelRectTransform = FinalScorePanel.GetComponent<RectTransform>();
         panelRectTransform.anchoredPosition = new Vector2(0, -Screen.height);
 
-        //Animate the panel to move up to the center of the screen
+        //Animates the panel to move up to the center of the screen
         panelRectTransform.DOAnchorPosY(0, 1f).SetEase(Ease.OutBounce).OnComplete(() =>
         {
             Time.timeScale = 0f; //freezes game nach der Animation
@@ -74,13 +103,26 @@ public class UIManager : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        Time.timeScale = 1f; // Resume the game
-        SceneManager.LoadSceneAsync(0); // Load the main menu scene
+        Time.timeScale = 1f; //resumes the game
+        SceneManager.LoadSceneAsync(0); 
+        ResetGame(); //reset game state before loading main menu
     }
 
     public void CloseGame()
     {
         //Application.Quit(); //nutzen für build
         UnityEditor.EditorApplication.isPlaying = false; //schließt den editor
+    }
+
+    private void ResetGame()
+    {
+        score = 0;
+        collectedItemCount = 0;
+        inventoryItems.Clear();
+        if (FinalScorePanel != null)
+        {
+            FinalScorePanel.SetActive(false);
+        }
+        Time.timeScale = 1f;
     }
 }
