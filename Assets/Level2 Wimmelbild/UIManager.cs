@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using DG.Tweening; 
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text scoreText;
     public GameObject FinalScorePanel;
     public TMP_Text EndScoreText;
+    public GameObject confettiEffect;
 
     private int score = 0; 
     private int collectedItemCount = 0; 
@@ -95,10 +97,22 @@ public class UIManager : MonoBehaviour
         panelRectTransform.anchoredPosition = new Vector2(0, -Screen.height);
 
         //Animates the panel to move up to the center of the screen
-        panelRectTransform.DOAnchorPosY(0, 1f).SetEase(Ease.OutBounce).OnComplete(() =>
+        panelRectTransform.DOAnchorPosY(0, 1f).SetEase(Ease.OutBounce).OnComplete(() => //Panelanimation
         {
-            Time.timeScale = 0f; //freezes game nach der Animation
+            StartCoroutine(DelayedFreeze()); //starts coroutine to delay the freezing of the game
         });
+
+        // Activate confetti effect
+        if (confettiEffect != null)
+        {
+            confettiEffect.SetActive(true);
+        }
+    }
+
+    private IEnumerator DelayedFreeze()
+    {
+        yield return new WaitForSeconds(1f); //delay after freeze from GameFinishedPanel
+        Time.timeScale = 0f; 
     }
 
     public void BackToMainMenu()
@@ -129,6 +143,10 @@ public class UIManager : MonoBehaviour
         if (FinalScorePanel != null)
         {
             FinalScorePanel.SetActive(false);
+        }
+        if (confettiEffect != null)
+        {
+            confettiEffect.SetActive(false);
         }
         Time.timeScale = 1f;
     }
