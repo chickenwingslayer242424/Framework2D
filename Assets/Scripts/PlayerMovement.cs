@@ -1,30 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
-    Vector2 movement;
+    private Vector2 _moveDirection;
+ 
+    public InputActionReference move;
+    
 
     // Update is called once per frame
     void Update()
     {
-        //input
-        
+        _moveDirection = move.action.ReadValue<Vector2>();
     }
 
     void FixedUpdate()  //fixedupdate ist framerate unabhängig // 50 fps
     {
-        rb.MovePosition(rb.position + movement * moveSpeed* Time.fixedDeltaTime);
-        Movement();
+        rb.velocity = new Vector2(_moveDirection.x *moveSpeed, _moveDirection.y * moveSpeed);
+      
     }
 
-    public void Movement()
-    {
-        movement.x = Input.GetAxisRaw("Horizontal");//gibt dir -1 wenn nach links, 1 wenn nach rechts, 0 wenn nichts gedrückt wird zurück
-        movement.y = Input.GetAxisRaw("Vertical"); //+1 oben, -1 unten, 0 nichts
-        movement = movement.normalized; // x und y haben konstante geschwindigkeit, mit normalized ist es auch queer gleich schnell 
-    }
+
 }
