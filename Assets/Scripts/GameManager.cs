@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour //put the ItemTrigger on the PlayerBody
     public TMP_Text endScoreText;
     public AudioClip collectSound;
     private AudioSource audioSource;
+    [SerializeField] private ParticleSystem pickUpParticle = default;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -31,14 +33,17 @@ public class GameManager : MonoBehaviour //put the ItemTrigger on the PlayerBody
         if (collision.gameObject.CompareTag("Item") && collision.gameObject.activeSelf)
         {
             Destroy(collision.gameObject);
+            ParticleSystem instantiatedParticle = Instantiate(pickUpParticle, collision.transform.position, Quaternion.identity);
+            instantiatedParticle.Play();
             pointsCounter += 1;
             pointsText.text = "Points: " + pointsCounter;
             SpawnNewItem();
             PlayCollectSound();
             endScoreText.text = "Your Score: " + pointsCounter;
-
+            Destroy(instantiatedParticle.gameObject, instantiatedParticle.main.duration);
 
         }
+
     }
     private void PlayCollectSound()
     {
