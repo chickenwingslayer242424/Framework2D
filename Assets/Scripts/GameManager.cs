@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour //put the ItemTrigger on the PlayerBody not the Item
 {
@@ -10,7 +11,21 @@ public class GameManager : MonoBehaviour //put the ItemTrigger on the PlayerBody
     public GameObject itemPrefab;
     public Vector2 spawnAreaMin;
     public Vector2 spawnAreaMax;
-   public TMP_Text endScoreText;
+    public TMP_Text endScoreText;
+    public AudioClip collectSound;
+    private AudioSource audioSource;
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        } // Get the AudioSource component
+        if (collectSound != null)
+        {
+            audioSource.clip = collectSound; // Assign the audio clip if set in the Inspector
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Item") && collision.gameObject.activeSelf)
@@ -19,7 +34,17 @@ public class GameManager : MonoBehaviour //put the ItemTrigger on the PlayerBody
             pointsCounter += 1;
             pointsText.text = "Points: " + pointsCounter;
             SpawnNewItem();
+            PlayCollectSound();
             endScoreText.text = "Your Score: " + pointsCounter;
+
+
+        }
+    }
+    private void PlayCollectSound()
+    {
+        if (audioSource != null && collectSound != null)
+        {
+            audioSource.Play(); // Play the assigned audio clip
         }
     }
     private void SpawnNewItem()
@@ -31,5 +56,5 @@ public class GameManager : MonoBehaviour //put the ItemTrigger on the PlayerBody
         // Instantiate the new item at the random position
         Instantiate(itemPrefab, spawnPosition, Quaternion.identity);
     }
-    
+
 }
