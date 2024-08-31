@@ -12,7 +12,7 @@ public class MusicPlayer : MonoBehaviour
     void Start()
     {
         
-        ObjectMusic = GameObject.FindWithTag("GameMusic");
+        ObjectMusic = GameObject.FindWithTag("GameMusic");  //AudioSource hat den Tag "GameMusic" 
         AudioSource = ObjectMusic.GetComponent<AudioSource>();
         musicVolume = PlayerPrefs.GetFloat("volume");
         AudioSource.volume = musicVolume; //für den scenenwechsel, wird 1x durchgelaufen in der neuen scene

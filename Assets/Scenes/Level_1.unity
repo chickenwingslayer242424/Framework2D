@@ -620,8 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bdbd31580dce3498841a315bc0bc90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioSource: {fileID: 0}
   volumeSlider: {fileID: 1059594654}
+  ObjectMusic: {fileID: 0}
 --- !u!4 &475912226
 Transform:
   m_ObjectHideFlags: 0

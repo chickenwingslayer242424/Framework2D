@@ -18,6 +18,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(2);
     }
+     public void PlayGame3()
+    {
+        SceneManager.LoadSceneAsync(3);
+    }
     public void CloseGame()
     {
         //Application.Quit(); //nutzen für build
