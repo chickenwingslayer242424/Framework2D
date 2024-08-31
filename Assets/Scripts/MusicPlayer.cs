@@ -14,7 +14,7 @@ public class MusicPlayer : MonoBehaviour
         
         ObjectMusic = GameObject.FindWithTag("GameMusic");  //AudioSource hat den Tag "GameMusic" 
         AudioSource = ObjectMusic.GetComponent<AudioSource>();
-        musicVolume = PlayerPrefs.GetFloat("volume");
+        musicVolume = PlayerPrefs.GetFloat("volume"); //beim start wird der gespeicherte Float abgerufen
         AudioSource.volume = musicVolume; //für den scenenwechsel, wird 1x durchgelaufen in der neuen scene
         volumeSlider.value = musicVolume;
     }
@@ -23,7 +23,7 @@ public class MusicPlayer : MonoBehaviour
     void Update()
     {
         AudioSource.volume = musicVolume;
-        PlayerPrefs.SetFloat("volume", musicVolume);
+        PlayerPrefs.SetFloat("volume", musicVolume); //speichert in der aktuellen scene den Float für Volume
     }
     public void updateVolume(float volume)
     {

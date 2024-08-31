@@ -32,19 +32,32 @@ public class GameManager : MonoBehaviour //put the ItemTrigger on the PlayerBody
     {
         if (collision.gameObject.CompareTag("Item") && collision.gameObject.activeSelf)
         {
+            ScoreCounter();
             Destroy(collision.gameObject);
-            ParticleSystem instantiatedParticle = Instantiate(pickUpParticle, collision.transform.position, Quaternion.identity);
-            instantiatedParticle.Play();
-            pointsCounter += 1;
-            pointsText.text = "Points: " + pointsCounter;
+            ParticleOnTrigger(collision);
             SpawnNewItem();
             PlayCollectSound();
-            endScoreText.text = "Your Score: " + pointsCounter;
-            Destroy(instantiatedParticle.gameObject, instantiatedParticle.main.duration);
-
+            SaveHighScore();
         }
 
     }
+    private void ParticleOnTrigger(Collider2D collision)
+    {
+        ParticleSystem instantiatedParticle = Instantiate(pickUpParticle, collision.transform.position, Quaternion.identity);
+        instantiatedParticle.Play();
+        Destroy(instantiatedParticle.gameObject, instantiatedParticle.main.duration);
+    }
+    private void ScoreCounter()
+    {
+        pointsCounter += 1;
+        pointsText.text = "Points: " + pointsCounter;
+        endScoreText.text = "Your Score: " + pointsCounter;
+    }
+    private void SaveHighScore()
+    {
+        PlayerPrefs.SetInt("PlayerScore", pointsCounter);
+    }
+  
     private void PlayCollectSound()
     {
         if (audioSource != null && collectSound != null)
