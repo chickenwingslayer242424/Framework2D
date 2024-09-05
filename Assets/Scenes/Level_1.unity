@@ -2989,7 +2989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerIsRunning: 0
-  timeRemaining: 3
+  timeRemaining: 10
   timerText: {fileID: 520523428}
   gameOverScreen: {fileID: 1094370128}
 --- !u!1 &842416005
