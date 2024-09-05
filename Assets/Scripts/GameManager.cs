@@ -14,7 +14,23 @@ public class GameManager : MonoBehaviour //put the ItemTrigger on the PlayerBody
     public TMP_Text endScoreText;
     public AudioClip collectSound;
     private AudioSource audioSource;
+    public string playerName;
+    public TMP_InputField playerNameInput;
     [SerializeField] private ParticleSystem pickUpParticle = default;
+    //   public static GameManager instance;
+    //    void Awake()
+    // {
+    //      if (instance == null)
+    //     {
+    //         instance = this;
+    //     }
+    //     else if (instance != this)
+    //     {
+    //         Destroy(gameObject);
+    //     }
+
+    //     DontDestroyOnLoad(gameObject);
+    // }
 
     void Start()
     {
@@ -52,6 +68,20 @@ public class GameManager : MonoBehaviour //put the ItemTrigger on the PlayerBody
         pointsCounter += 1;
         pointsText.text = "Points: " + pointsCounter;
         endScoreText.text = "Your Score: " + pointsCounter;
+    }
+    //    public int GetScore()
+    // {
+    //     return pointsCounter;
+    // }
+    // public string GetName()
+    // {
+    //     return playerName;
+    // }
+    public void SavePlayerName()
+    {
+        playerName = playerNameInput.text;
+        PlayerPrefs.SetString("PlayerName", playerName);
+
     }
     private void SaveHighScore()
     {
