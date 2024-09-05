@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
     }
     public void CloseGame()
     {
-        //Application.Quit(); //nutzen für build
-        UnityEditor.EditorApplication.isPlaying = false; //schließt den editor
+        Application.Quit(); //nutzen für build
+        //UnityEditor.EditorApplication.isPlaying = false; //schließt den editor
     }
 }
